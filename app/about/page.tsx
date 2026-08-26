@@ -83,10 +83,10 @@ export default function AboutPage() {
                   every dollar it raises directly into the Columbia community.
                 </p>
                 <p className="mb-5 max-w-[65ch] text-[1.15rem]">
-                  Our flagship production, TEDxCongaree Vista, is the first standard TEDx event
-                  held in Columbia in over ten years. Beyond our flagship event, we run an annual
-                  associate program that gives Columbia-area students hands-on experience
-                  producing real community programming.
+                  Our organization was proud to support TEDxCongaree Vista, an independently organized effort
+                  that brought the first standard TEDx gathering held in Columbia in over ten years.
+                  Alongside supporting independent community initiatives, we run an annual associate program
+                  that gives Columbia-area students hands-on experience producing real community programming.
                 </p>
                 <p className="m-0 max-w-[65ch] text-[1.15rem]">
                   As a 501(c)(3) nonprofit corporation, all donations to Inspire Columbia are
