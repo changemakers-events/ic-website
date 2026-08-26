@@ -1,0 +1,27 @@
+name: Keep dev Supabase project alive
+
+# Supabase's free tier pauses a project after 7 days with no API activity.
+# Production is kept alive by Vercel Cron hitting /api/cron/keep-alive, but
+# Vercel Cron only ever invokes Production deployments, so it can't reach the
+# separate dev Supabase project (tvfdlyecmdmzqjbdgwtq) that Preview/local
+# dev point at. This pings it directly instead.
+on:
+  schedule:
+    - cron: "0 0 */3 * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping dev Supabase project
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" \
+            "${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}/rest/v1/jobs?select=id&limit=1" \
+            -H "apikey: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}")
+          echo "Response status: $status"
+          if [ "$status" -ge 300 ]; then
+            echo "Ping failed with status $status" >&2
+            exit 1
+          fi
