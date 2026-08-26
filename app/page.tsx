@@ -59,7 +59,7 @@ export default function Home() {
         <section className="bg-[var(--surface-blue)] py-13 md:py-16" id="events">
           <div className="mx-auto w-full max-w-[1100px] px-6 md:px-8">
             <h2 className="mb-4 mt-0 [font-family:var(--font-serif)] text-[clamp(1.55rem,3vw,2.3rem)] font-semibold">
-              Our Events
+              Events We Support
             </h2>
             <p className="mb-5 text-[1.15rem]">
               We are youth-powered and forward focused, bringing together the next generation of students and community leaders
@@ -84,8 +84,8 @@ export default function Home() {
                   />
                   <p className="m-0 text-[1.05rem]">
                     <strong>March 14th, 2026</strong><br /><br />
-                    TEDxCongaree Vista is the flagship production of Inspire Columbia, and is the
-                    first standard TEDx event in Columbia for over 10 years.
+                    TEDxCongaree Vista is an independently organized TEDx event, and was the
+                    first standard TEDx event in Columbia in over 10 years.
                   </p>
                   <a
                     className="inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-6 py-3 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
@@ -132,7 +132,7 @@ export default function Home() {
               Moments From Our Programs
             </h2>
             <p className="mb-8 max-w-[60ch] text-[1.05rem] text-white/70">
-              Scenes from our student leadership programming across Columbia.
+              Scenes from student leadership programming across Columbia that we&apos;ve supported.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-3">
               {moments.map((photo) => (
