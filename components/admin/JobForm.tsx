@@ -238,17 +238,16 @@ export default function JobForm({
 
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="flex flex-col gap-1.5">
-            <Label htmlFor="role">
-              Program / role
-              <Required />
-            </Label>
+            <Label htmlFor="role">Program / role (optional)</Label>
             <Input
               id="role"
               name="role"
-              required
               placeholder="2026 Associate Program"
               defaultValue={job?.role}
             />
+            <p className="text-sm text-muted-foreground">
+              Shown as a small label above the title on the public posting. Leave blank to omit it.
+            </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
