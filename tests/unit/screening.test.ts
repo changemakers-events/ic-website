@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   availableTeams,
+  countWords,
+  MAX_WHAT_APPEALS_WORDS,
   SCREENING_QUESTIONS,
   TEAM_6_SUB_TRACKS,
   TEAM_DESCRIPTIONS,
@@ -59,6 +61,21 @@ describe("TEAM_DESCRIPTIONS", () => {
     const withSubTracks = TEAM_DESCRIPTIONS.filter((t) => t.subTracks);
     expect(withSubTracks).toHaveLength(1);
     expect(withSubTracks[0].subTracks!.map((s) => s.title)).toEqual([...TEAM_6_SUB_TRACKS]);
+  });
+});
+
+describe("countWords", () => {
+  it("counts whitespace-separated tokens, ignoring surrounding and repeated whitespace", () => {
+    expect(countWords("")).toBe(0);
+    expect(countWords("   \n\t ")).toBe(0);
+    expect(countWords("one")).toBe(1);
+    expect(countWords("  two   words\nhere  ")).toBe(3);
+  });
+
+  it("treats a MAX_WHAT_APPEALS_WORDS-long answer as at the limit, not over", () => {
+    const atLimit = Array.from({ length: MAX_WHAT_APPEALS_WORDS }, () => "word").join(" ");
+    expect(countWords(atLimit)).toBe(MAX_WHAT_APPEALS_WORDS);
+    expect(countWords(`${atLimit} over`)).toBe(MAX_WHAT_APPEALS_WORDS + 1);
   });
 });
 

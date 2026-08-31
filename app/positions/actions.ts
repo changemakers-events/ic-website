@@ -7,7 +7,7 @@ import {
   generateApplicationId,
 } from "@/lib/applications";
 import { ApplicationUploadError, uploadApplicationDocument } from "@/lib/storage";
-import { SCREENING_QUESTIONS } from "@/lib/screening";
+import { SCREENING_QUESTIONS, MAX_WHAT_APPEALS_WORDS, countWords } from "@/lib/screening";
 import { sendEmail, sendTemplateEmail } from "@/lib/email/send";
 import { getStaffAlertEmail, getStaffAlertTemplateId } from "@/lib/settings";
 import {
@@ -65,6 +65,17 @@ export async function submitApplication(
   }
   if (!transcriptFile || transcriptFile.size === 0) {
     return { error: "An unofficial transcript upload is required.", field: "transcript" };
+  }
+
+  // Checked before any upload so an over-limit answer fails fast without
+  // leaving an orphaned Storage file. The form enforces the same cap
+  // client-side; this is the authoritative check.
+  const whatAppeals = ((formData.get("whatAppeals") as string | null) ?? "").trim();
+  if (countWords(whatAppeals) > MAX_WHAT_APPEALS_WORDS) {
+    return {
+      error: `Please limit your response to ${MAX_WHAT_APPEALS_WORDS} words.`,
+      field: "whatAppeals",
+    };
   }
 
   try {

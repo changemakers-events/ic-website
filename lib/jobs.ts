@@ -32,14 +32,18 @@ export function getDisplayStatus(
 
 // Both posting_date and published_at are timestamptz instants -- public
 // display deliberately shows only the date, never the scheduled time, so
-// this stays a plain date formatter for both.
-function formatDate(value: string | null): string {
+// this stays a plain date formatter for both. Pinned to America/New_York
+// (Inspire Columbia is in Columbia, SC) like lib/history.ts -- otherwise a
+// deadline set to "Sep 17, 11:59 PM ET" in the admin form is stored as
+// 2026-09-18T03:59:00Z and renders as "September 18" on Vercel's UTC clock.
+export function formatDate(value: string | null): string {
   if (!value) return "";
-  return new Date(value).toLocaleDateString("en-US", {
+  return new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+    timeZone: "America/New_York",
+  }).format(new Date(value));
 }
 
 // For contexts that can't render Markdown (SEO/OG meta description tags) --
@@ -69,6 +73,7 @@ export function jobRowToJob(row: JobRow): Job {
     description: row.description,
     applyUrl: row.apply_url,
     acceptingApplications: row.accepting_applications,
+    showMailingListButton: row.show_mailing_list_button,
     postedDate: formatDate(row.posting_date),
     lastPublished: formatDate(row.published_at),
     photoUrl: jobPhotoPublicUrl(row.photo_path),

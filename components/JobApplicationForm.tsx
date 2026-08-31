@@ -21,6 +21,7 @@ import { submitApplication } from "@/app/positions/actions";
 import { useServerFormError } from "@/lib/hooks/useServerFormError";
 import { cn } from "@/lib/utils";
 import {
+  MAX_WHAT_APPEALS_WORDS,
   SCHOOLS,
   SCREENING_QUESTIONS,
   TEAM_6_PARENT_TITLE,
@@ -28,6 +29,7 @@ import {
   TEAM_DESCRIPTIONS,
   YEAR_OF_STUDY_OPTIONS,
   availableTeams,
+  countWords,
 } from "@/lib/screening";
 
 // Sentinel for the team-preference dropdowns' "deselect back to blank"
@@ -520,6 +522,9 @@ export default function JobApplicationForm({
     },
   ];
 
+  const whatAppealsWordCount = countWords(whatAppeals);
+  const whatAppealsOverLimit = whatAppealsWordCount > MAX_WHAT_APPEALS_WORDS;
+
   return (
     <main className="bg-[var(--surface)] px-6 py-12 md:px-8 md:py-16">
       <div className="mx-auto w-full max-w-[800px]">
@@ -935,28 +940,55 @@ export default function JobApplicationForm({
             </FormSection>
 
             <FormSection title="Additional information">
-              <div>
+              <div
+                {...fieldErrorProps("whatAppeals")}
+                className={cn(erroredField === "whatAppeals" && erroredFieldClassName)}
+              >
                 <Label htmlFor="whatAppeals" className="mb-1.5">
                   {SCREENING_QUESTIONS.whatAppeals.question} (optional)
                 </Label>
                 <p className="mb-1.5 mt-1 text-sm text-[var(--ink-muted)]">
-                  Resumes don&apos;t always capture the full story. Share anything else you&apos;d like us to know about you, your goals, or your interest in joining our team. A short response is completely fine.
+                  Resumes don&apos;t always capture the full story. Share anything else you&apos;d like us
+                  to know about you, your goals, or your interest in joining our team. We much prefer a few
+                  short and genuine sentences over anything AI generated. Limit 100 words.
                 </p>
                 <Textarea
                   id="whatAppeals"
                   name="whatAppeals"
                   rows={5}
                   value={whatAppeals}
-                  onChange={(e) => setWhatAppeals(e.target.value)}
+                  onChange={(e) => {
+                    setWhatAppeals(e.target.value);
+                    clearFieldError("whatAppeals");
+                  }}
+                  aria-invalid={whatAppealsOverLimit}
                   className={`${fieldClassName} h-auto`}
                 />
+                <p
+                  className={cn(
+                    "mt-1.5 text-sm",
+                    whatAppealsOverLimit ? "text-red-600" : "text-[var(--ink-muted)]"
+                  )}
+                >
+                  {whatAppealsWordCount} / {MAX_WHAT_APPEALS_WORDS} words
+                </p>
               </div>
             </FormSection>
 
             <div className="border-t border-[var(--line)] pt-7">
-              <Button type="submit" disabled={pending} className="h-12 w-full px-8 text-base sm:w-auto">
+              <Button
+                type="submit"
+                disabled={pending || whatAppealsOverLimit}
+                className="h-12 w-full px-8 text-base sm:w-auto"
+              >
                 {pending ? "Submitting..." : "Submit application"}
               </Button>
+              {whatAppealsOverLimit && (
+                <p className="mt-3 text-sm text-red-600">
+                  Please shorten your response under &ldquo;{SCREENING_QUESTIONS.whatAppeals.question}
+                  &rdquo; to {MAX_WHAT_APPEALS_WORDS} words or fewer.
+                </p>
+              )}
               <p className="mt-3 text-sm text-[var(--ink-muted)]">
                 We&apos;ll review your application and follow up by email.
               </p>

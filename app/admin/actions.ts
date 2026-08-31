@@ -41,6 +41,10 @@ function jobFromFormData(formData: FormData) {
     // "false" only when JobForm's apply-source radio is set to "Not
     // accepting applications yet" -- see the published-status guard below.
     accepting_applications: formData.get("accepting_applications") !== "false",
+    // Absent on a create with the box left at its default; treat anything
+    // that isn't an explicit "false" as "show it" so new jobs match the
+    // column default.
+    show_mailing_list_button: formData.get("show_mailing_list_button") !== "false",
   };
 }
 
@@ -111,7 +115,9 @@ function photoUploadErrorMessage(err: unknown): string {
 function validateJobFields(job: ReturnType<typeof jobFromFormData>): string | null {
   if (!job.title?.trim()) return "Title is required.";
   if (!job.slug?.trim()) return "Web address is required.";
-  if (!job.role?.trim()) return "Program / role is required.";
+  // Program / role is optional -- the public posting just omits the eyebrow
+  // label above the title when it's blank. The DB column is NOT NULL, so
+  // jobFromFormData submits "" (never null) when the field is left empty.
   if (!job.location?.trim()) return "Location is required.";
   if (!job.commitment_type?.trim()) return "Commitment is required.";
   if (!job.description?.trim()) return "Description is required.";
