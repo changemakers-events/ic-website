@@ -123,6 +123,19 @@ export const SCREENING_QUESTIONS = {
 
 export type ScreeningQuestionKey = keyof typeof SCREENING_QUESTIONS;
 
+// The free-text "what appeals to you" answer is capped at 100 words, matching
+// the "Limit 100 words" instruction shown on the form. Counted as
+// whitespace-separated tokens (not characters). Enforced server-side in
+// submitApplication; the form also renders a live counter and blocks submit
+// while over. Imported by both the client form and the server action, so it
+// lives in this shared (directive-free) module.
+export const MAX_WHAT_APPEALS_WORDS = 100;
+
+export function countWords(value: string): number {
+  const trimmed = value.trim();
+  return trimmed ? trimmed.split(/\s+/).length : 0;
+}
+
 // The fixed, exhaustive list of Columbia-area schools accepted as a valid
 // college -- no free-typed "Other" fallback anymore, both here and in
 // submit_application's validation. Keep in sync with the keys of
