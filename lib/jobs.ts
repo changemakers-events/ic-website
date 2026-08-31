@@ -73,6 +73,7 @@ export function jobRowToJob(row: JobRow): Job {
     description: row.description,
     applyUrl: row.apply_url,
     acceptingApplications: row.accepting_applications,
+    showMailingListButton: row.show_mailing_list_button,
     postedDate: formatDate(row.posting_date),
     lastPublished: formatDate(row.published_at),
     photoUrl: jobPhotoPublicUrl(row.photo_path),

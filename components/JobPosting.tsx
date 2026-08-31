@@ -15,6 +15,7 @@ export type Job = {
   description: string;
   applyUrl: string | null;
   acceptingApplications: boolean;
+  showMailingListButton: boolean;
   postedDate: string;
   lastPublished: string;
   photoUrl: string | null;
@@ -50,6 +51,30 @@ const markdownComponents: Components = {
 
 const applyButtonClassName =
   "inline-block bg-[var(--brand)] px-6 py-3 text-[1rem] font-semibold text-white no-underline transition-colors duration-200 hover:bg-[var(--brand-hover)]";
+
+// Secondary treatment (outline, not a filled --brand block) so it reads as
+// the lesser of the two CTAs next to "Apply now". Same padding/typography
+// as applyButtonClassName.
+const mailingListButtonClassName =
+  "inline-block border border-[var(--brand)] px-6 py-3 text-[1rem] font-semibold text-[var(--brand)] no-underline transition-colors duration-200 hover:bg-[var(--brand)] hover:text-white";
+
+// Hardcoded, site-wide: shown on every position page beside Apply. Points
+// at the general Inspire Columbia interest form (Google Forms).
+const JOIN_MAILING_LIST_URL = "https://forms.gle/zXDZwg27PXUkKDFy6";
+
+function MailingListButton() {
+  return (
+    <a
+      href={JOIN_MAILING_LIST_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Join the Inspire Columbia mailing list (opens in a new tab)"
+      className={mailingListButtonClassName}
+    >
+      Join Mailing List
+    </a>
+  );
+}
 
 // applyUrl set: staff opted for an external form, link out as before. Null:
 // use the built-in application form, same tab, no "(opens in a new tab)".
@@ -126,7 +151,10 @@ export default function JobPosting({ job }: { job: Job }) {
                 </div>
               )}
 
-              <ApplyButton jobTitle={job.title} jobSlug={job.slug} applyUrl={job.applyUrl} />
+              <div className="flex flex-wrap items-center gap-4">
+                <ApplyButton jobTitle={job.title} jobSlug={job.slug} applyUrl={job.applyUrl} />
+                {job.showMailingListButton && <MailingListButton />}
+              </div>
             </div>
 
             {job.photoUrl && (
@@ -164,6 +192,7 @@ export default function JobPosting({ job }: { job: Job }) {
 
           <div className="flex flex-wrap items-center gap-4 border-t border-[var(--line)] pt-8">
             <ApplyButton jobTitle={job.title} jobSlug={job.slug} applyUrl={job.applyUrl} />
+            {job.showMailingListButton && <MailingListButton />}
           </div>
         </div>
       </section>

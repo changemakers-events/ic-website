@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import JobPhotoField from "@/components/admin/JobPhotoField";
 import type { FormState } from "@/app/admin/actions";
 import type { Database } from "@/lib/database.types";
@@ -143,6 +144,17 @@ export default function JobForm({
     job ? (job.application_template_id ?? "none") : templates.length === 1 ? templates[0].id : "none"
   );
   const [applyUrlValue, setApplyUrlValue] = useState(job?.apply_url ?? "");
+
+  // Secondary "Join Mailing List" button next to Apply on the public
+  // posting. On for every job by default (matches the column default);
+  // staff can turn it off per posting. base-ui's Checkbox doesn't emit a
+  // bubbling native change event, so the form-level onChange dirty tracking
+  // won't fire -- onDirtyChange is called explicitly in the handler, and a
+  // controlled hidden input carries the value into the form submission
+  // (same pattern as accepting_applications above).
+  const [showMailingListButton, setShowMailingListButton] = useState(
+    job?.show_mailing_list_button ?? true
+  );
 
   // Defaults to "now" for a brand-new job (or one that's never had a
   // posting date) so creating a job and saving it is enough to post it
@@ -389,6 +401,30 @@ export default function JobForm({
               plain not-found page, even if this job is Published.
             </p>
           )}
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <input
+            type="hidden"
+            name="show_mailing_list_button"
+            value={showMailingListButton ? "true" : "false"}
+            readOnly
+          />
+          <label htmlFor="show_mailing_list_button" className="flex items-center gap-2 text-sm">
+            <Checkbox
+              id="show_mailing_list_button"
+              checked={showMailingListButton}
+              onCheckedChange={(checked) => {
+                setShowMailingListButton(checked === true);
+                onDirtyChange?.(true);
+              }}
+            />
+            Show the &ldquo;Join Mailing List&rdquo; button on the public posting
+          </label>
+          <p className="text-sm text-muted-foreground">
+            A secondary button next to Apply that links to Inspire Columbia&apos;s interest form.
+            Uncheck to hide it for this posting.
+          </p>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2">

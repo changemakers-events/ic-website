@@ -41,6 +41,10 @@ function jobFromFormData(formData: FormData) {
     // "false" only when JobForm's apply-source radio is set to "Not
     // accepting applications yet" -- see the published-status guard below.
     accepting_applications: formData.get("accepting_applications") !== "false",
+    // Absent on a create with the box left at its default; treat anything
+    // that isn't an explicit "false" as "show it" so new jobs match the
+    // column default.
+    show_mailing_list_button: formData.get("show_mailing_list_button") !== "false",
   };
 }
 
