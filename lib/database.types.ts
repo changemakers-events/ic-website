@@ -415,6 +415,7 @@ export type Database = {
           posting_date: string | null
           published_at: string | null
           role: string
+          show_mailing_list_button: boolean
           slug: string
           status: Database["public"]["Enums"]["job_status"]
           title: string
@@ -435,6 +436,7 @@ export type Database = {
           posting_date?: string | null
           published_at?: string | null
           role: string
+          show_mailing_list_button?: boolean
           slug: string
           status?: Database["public"]["Enums"]["job_status"]
           title: string
@@ -455,6 +457,7 @@ export type Database = {
           posting_date?: string | null
           published_at?: string | null
           role?: string
+          show_mailing_list_button?: boolean
           slug?: string
           status?: Database["public"]["Enums"]["job_status"]
           title?: string

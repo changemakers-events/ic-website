@@ -68,9 +68,11 @@ export default async function JobsIndexPage() {
                       href={`/positions/${job.slug}`}
                       className="block h-full rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-6 no-underline transition-all duration-150 hover:border-[var(--brand)] hover:shadow-[0_8px_24px_rgba(29,78,216,0.12)]"
                     >
-                      <p className="m-0 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--brand)]">
-                        {job.role}
-                      </p>
+                      {job.role && (
+                        <p className="m-0 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--brand)]">
+                          {job.role}
+                        </p>
+                      )}
                       <p className="mb-3 mt-1 text-[1.4rem] font-semibold text-[var(--ink)] [font-family:var(--font-serif)]">
                         {job.title}
                       </p>
