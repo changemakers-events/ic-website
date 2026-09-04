@@ -73,22 +73,29 @@ export default function Home() {
               costs like printing, signage, promotion, audio/visual needs, food, and venue expenses for our educational events.
             </p>
             <div className="mt-6 border-t border-[var(--line)] pt-6">
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-6 flex flex-col gap-4 transition-all duration-150 hover:border-[var(--brand)] hover:shadow-[0_8px_24px_rgba(29,78,216,0.12)]">
-                  <Image
-                    src="/tedxcv.png"
-                    alt="TEDxCongaree Vista logo"
-                    width={1400}
-                    height={504}
-                    className="block h-auto w-full max-w-[340px]"
-                  />
-                  <p className="m-0 text-[1.05rem]">
-                    <strong>March 14th, 2026</strong><br /><br />
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div className="flex h-full flex-col gap-3 rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="m-0 text-[1.05rem] font-bold text-[var(--ink)] [font-family:var(--font-serif)]">
+                        TEDxCongaree Vista
+                      </p>
+                      <p className="m-0 mt-1 text-[0.9rem] text-[var(--ink-muted)]">March 14th, 2026</p>
+                    </div>
+                    <Image
+                      src="/tedxcv.png"
+                      alt="TEDxCongaree Vista logo"
+                      width={1400}
+                      height={504}
+                      className="h-15 w-auto shrink-0 object-contain object-right"
+                    />
+                  </div>
+                  <p className="m-0 text-[0.98rem]">
                     TEDxCongaree Vista is an independently organized TEDx event, and was the
                     first standard TEDx event in Columbia in over 10 years.
                   </p>
                   <a
-                    className="inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-6 py-3 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
+                    className="mt-auto inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-5 py-2.5 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
                     href="https://tedxcongareevista.com"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -96,23 +103,95 @@ export default function Home() {
                     Visit Event Website
                   </a>
                 </div>
-                <div className="rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-6 flex flex-col gap-4 transition-all duration-150 hover:border-[var(--brand)] hover:shadow-[0_8px_24px_rgba(29,78,216,0.12)]">
-                  <Image
-                    src="/screwupnights-logo.png"
-                    alt="SCrewUp Nights logo"
-                    width={757}
-                    height={592}
-                    className="block h-auto w-full max-w-[180px]"
-                  />
-                  <p className="m-0 text-[1.05rem]">
-                    <strong>September 2nd, 2026</strong><br /><br />
-                    SCrewUp Nights is a new Inspire Columbia project celebrating the stories
+                <div className="flex h-full flex-col gap-3 rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="m-0 text-[1.05rem] font-bold text-[var(--ink)] [font-family:var(--font-serif)]">
+                        ScrewUp Nights
+                      </p>
+                      <p className="m-0 mt-1 text-[0.9rem] text-[var(--ink-muted)]">September 2nd, 2026</p>
+                    </div>
+                    <Image
+                      src="/screwupnights-logo.png"
+                      alt="ScrewUp Nights logo"
+                      width={757}
+                      height={592}
+                      className="h-20 w-auto shrink-0 object-contain object-right"
+                    />
+                  </div>
+                  <p className="m-0 text-[0.98rem]">
+                    ScrewUp Nights is a new Inspire Columbia project celebrating the stories
                     behind setbacks, bringing the community together to share and learn from
                     the moments that didn&apos;t go as planned.
                   </p>
                   <a
-                    className="inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-6 py-3 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
+                    className="mt-auto inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-5 py-2.5 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
                     href="https://www.screwupnights.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit Event Website
+                  </a>
+                </div>
+              </div>
+
+              <h3 className="mb-4 mt-10 [font-family:var(--font-serif)] text-[1.3rem] font-semibold">
+                Partnered Events
+              </h3>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div className="flex h-full flex-col gap-3 rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="m-0 text-[1.05rem] font-bold text-[var(--ink)] [font-family:var(--font-serif)]">
+                        Cola Cafe Fest
+                      </p>
+                      <p className="m-0 mt-1 text-[0.9rem] text-[var(--ink-muted)]">September 27th, 2026</p>
+                    </div>
+                    <Image
+                      src="/event_logos/cola_cafe_fest_26.png"
+                      alt="Cola Cafe Fest logo"
+                      width={170}
+                      height={169}
+                      className="h-25 w-auto shrink-0 rounded-full object-cover"
+                    />
+                  </div>
+                  <p className="m-0 text-[0.98rem]">
+                    Cola Cafe Fest is a celebration of Columbia&apos;s local coffee culture,
+                    bringing together cafes, roasters, and coffee lovers from across the community.
+                  </p>
+                  <a
+                    className="mt-auto inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-5 py-2.5 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
+                    href="https://colacafefest.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit Event Website
+                  </a>
+                </div>
+                <div className="flex h-full flex-col gap-3 rounded-[10px] border border-[var(--line)] bg-[var(--card-public)] p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="m-0 text-[1.05rem] font-bold text-[var(--ink)] [font-family:var(--font-serif)]">
+                        Columbia Italian Festival
+                      </p>
+                      <p className="m-0 mt-1 text-[0.9rem] text-[var(--ink-muted)]">October 10th, 2026</p>
+                    </div>
+                    <Image
+                      src="/event_logos/italian_festival_26.jpeg"
+                      alt="Columbia Italian Festival logo"
+                      width={504}
+                      height={502}
+                      className="h-25 w-auto shrink-0 rounded-full object-cover"
+                    />
+                  </div>
+                  <p className="m-0 text-[0.98rem]">
+                    The Columbia Italian Festival celebrates Italian heritage, food, and culture
+                    with live entertainment, vendors, and family-friendly activities in the heart
+                    of Columbia.
+                  </p>
+                  <a
+                    className="mt-auto inline-block self-start rounded-full border-2 border-[var(--brand)] bg-[var(--card-public)] px-5 py-2.5 font-bold text-[var(--brand)] no-underline transition-colors duration-150 hover:bg-[var(--brand)] hover:text-white"
+                    href="https://italianfestivalcolumbia.weebly.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -124,7 +203,7 @@ export default function Home() {
           </div>
         </section>
 
-        
+
 
         <section className="bg-[var(--ink)] py-14 md:py-16">
           <div className="mx-auto w-full max-w-[1100px] px-6 md:px-8">
